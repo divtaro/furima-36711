@@ -24,11 +24,11 @@
 | ------------------ | ----------- | ------------------------------ |
 | item_name          | string      | null: false                    | 
 | description        | text        | null: false                    | 
-| category           | boolean     | null: false                    | 
-| status             | boolean     | null: false                    | 
-| delivery_charge    | boolean     | null: false                    | 
+| category_id        | integer     | null: false                    | 
+| status_id          | integer     | null: false                    | 
+| delivery_charge_id | integer     | null: false                    | 
 | prefecture_id      | integer     | null: false                    | 
-| days_ship          | boolean     | null: false                    | 
+| days_ship_id       | integer     | null: false                    | 
 | price              | integer     | null: false                    | 
 | user               | references  | null: false, foreign_key: true | 
 

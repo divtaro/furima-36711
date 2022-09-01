@@ -7,9 +7,7 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品出品データ登録' do
-
     context '商品を出品できる場合' do
-
       it 'item_nameが1文字ならば出品できる' do
         item_name = 'a'
         expect(@item).to be_valid
@@ -59,7 +57,7 @@ RSpec.describe Item, type: :model do
         delivery_charge_id = 3
         expect(@item).to be_valid
       end
-      
+
       it 'prefecture_idが2ならば出品できる' do
         prefecture_id = 2
         expect(@item).to be_valid
@@ -78,7 +76,7 @@ RSpec.describe Item, type: :model do
       it 'days_ship_idが4ならば出品できる' do
         days_ship_id = 4
         expect(@item).to be_valid
-      end 
+      end
 
       it 'priceが300（半角）ならば出品できる' do
         price = 300
@@ -86,7 +84,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが9999999（半角）ならば出品できる' do
-        price = 9999999
+        price = 9_999_999
         expect(@item).to be_valid
       end
 
@@ -96,9 +94,7 @@ RSpec.describe Item, type: :model do
       end
     end
 
-
     context '商品を出品できない場合' do
-
       it 'item_nameが存在しなければ出品できない' do
         @item.item_name = ''
         @item.valid?
@@ -108,7 +104,7 @@ RSpec.describe Item, type: :model do
       it 'item_nameが41文字では出品できない' do
         @item.item_name = 'a' * 41
         @item.valid?
-        expect(@item.errors.full_messages).to include("Item name is too long (maximum is 40 characters)")
+        expect(@item.errors.full_messages).to include('Item name is too long (maximum is 40 characters)')
       end
 
       it 'descriptionが存在しなければ出品できない' do
@@ -120,7 +116,7 @@ RSpec.describe Item, type: :model do
       it 'descriptionが1001文字では出品できない' do
         @item.description = 'a' * 1001
         @item.valid?
-        expect(@item.errors.full_messages).to include("Description is too long (maximum is 1000 characters)")
+        expect(@item.errors.full_messages).to include('Description is too long (maximum is 1000 characters)')
       end
 
       it 'category_idが1では出品できない' do
@@ -154,33 +150,33 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが存在しなければ出品できない' do
-        @item.price= ''
+        @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
+        expect(@item.errors.full_messages).to include("Price can't be blank", 'Price is not a number')
       end
 
       it 'priceが299円では出品できない' do
-        @item.price= 299
+        @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it 'priceが10000000円では出品できない' do
-        @item.price= 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
       it 'priceが全角英数字では出品できない' do
-        @item.price= '３００'
+        @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'priceが数字以外では出品できない' do
-        @item.price= '山田ヤマダやまだＹＡＭＡＤＡ'
+        @item.price = '山田ヤマダやまだＹＡＭＡＤＡ'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'imageが存在しなければ出品できない' do
@@ -192,8 +188,8 @@ RSpec.describe Item, type: :model do
       it 'userが紐付いていなければ出品できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
-  end  
+  end
 end

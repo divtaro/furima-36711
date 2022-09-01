@@ -9,9 +9,9 @@ FactoryBot.define do
     days_ship_id        { Faker::Number.between(from: 2, to: 4) }
     price               { Faker::Number.between(from: 300, to: 9_999_999) }
     association :user
-  end
-
-  factory :image do
-    image { Rack::Test::UploadedFile.new(File.join(Rails.root, 'app/assets/images/furima-intro01.png'), 'image/png') }
+    
+    after(:build) do |item|
+      item.image.attach(io: File.open('app/assets/images/test_image.png'), filename: 'test_image.png')
+    end
   end
 end

@@ -1,13 +1,8 @@
 window.addEventListener('load', () => {
-  //コンソール上の表示確認用
-  // console.log("OK"); 
+  
   // 金額を入力した数値をpriceInputという変数に格納する
   const priceInput = document.getElementById("item-price");
   priceInput.addEventListener("input", () => {
-  //コンソール上の表示確認用
-  // console.log("イベント発火");
-  const inputValue = priceInput.value;
-  console.log(inputValue);
 
   // 販売手数料の変数を定義
   const addTaxDom = document.getElementById('add-tax-price');

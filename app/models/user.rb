@@ -19,5 +19,6 @@ class User < ApplicationRecord
 
   validates :date_birth,        presence: true
 
-  has many :items
+  #アソシエーション
+  has_many :items
 end

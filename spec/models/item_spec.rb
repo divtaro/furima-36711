@@ -6,7 +6,7 @@ RSpec.describe Item, type: :model do
     @item.image = fixture_file_upload('app/assets/images/furima-intro01.png')
   end
 
-  describe 'ユーザー新規登録' do
+  describe '商品出品データ登録' do
 
     context '商品を出品できる場合' do
 
@@ -187,6 +187,12 @@ RSpec.describe Item, type: :model do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+
+      it 'userが紐付いていなければ出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end  

@@ -3,6 +3,7 @@ class Item < ApplicationRecord
 
   # **バリデーション
   validates :item_name,          presence: true, length: { maximum: 40 }
+  validates :description,        presence: true, length: { maximum: 1000 }
   validates :category_id,        presence: true
   validates :status_id,          presence: true
   validates :delivery_charge_id, presence: true

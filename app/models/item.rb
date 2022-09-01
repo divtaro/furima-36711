@@ -23,7 +23,7 @@ class Item < ApplicationRecord
   validates :prefecture_id,      numericality: { other_than: 1, message: "can't be blank" }
   validates :days_ship_id,       numericality: { other_than: 1, message: "can't be blank" }
 
- # ** アソシエーション
+  # ** アソシエーション
   # ** ↓userとのアソシエーションを組まないと、どのユーザーが出品するのかが判らないため、出品データを保存できない。
   belongs_to :user
   belongs_to :buy_record
@@ -35,5 +35,4 @@ class Item < ApplicationRecord
   belongs_to :delivery_charge
   belongs_to :prefecture
   belongs_to :days_ship
-
 end

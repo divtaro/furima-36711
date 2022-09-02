@@ -23,7 +23,9 @@
       </span>
     </div>
 
-    <% if user_signed_in? && @item.buy_record == nil %>
+    <% if user_signed_in? %>
+    <%# 上記コードは購入機能実装後に以下コードに差し替える %>
+    <%# <% if user_signed_in? && @item.buy_record == nil %>
       <% if current_user.id == @item.user_id %>
         <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
@@ -101,6 +103,7 @@
       後ろの商品 ＞
     </a>
   </div>
+
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
 </div>
 

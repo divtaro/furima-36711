@@ -3,8 +3,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order('id DESC')
-    # @items = Item.all.includes(:user)
-    # @items = Item.all
   end
 
   def new

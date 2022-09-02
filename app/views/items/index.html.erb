@@ -125,12 +125,12 @@
 
           <%# 購入機能実装後にsold out表示を確認 %>
           <%# 商品が売れていればsold outを表示しましょう %>
-          <% if item.buy_record.present? %>
-          <div class='sold-out'>
+          <%# <% if item.buy_record.present? %>
+          <%# <div class='sold-out'>
             <span>Sold Out!!</span>
-          </div>
+          </div> %>
           <%# //商品が売れていればsold outを表示しましょう %>
-          <% end %>
+          <%# <% end %>
 
         </div>
         <div class='item-info'>
@@ -149,6 +149,7 @@
       </li>
       <% end %>
 
+      <% if @items == nil %>
       <li class='list'>
         <%= link_to '#' do %>
         <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -165,6 +166,7 @@
           </div>
         </div>
         <% end %>
+      <% end %>
       </li>
     </ul>
   </div>

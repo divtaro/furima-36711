@@ -19,6 +19,6 @@ class BuyForm
 
   def save
     BuyRecord.create(user: user, item: item)
-    ShipAddress.create(post_code: post_code, prefecture_id: prefecture_id, municipalities: municipalities, house_num: house_num, building: building, tel: tel, buy_record: buy_record )
+    ShipAddress.create(post_code: post_code, prefecture_id: prefecture_id, municipalities: municipalities, house_num: house_num, building: building, tel: tel, buy_record: buy_record)
   end
 end

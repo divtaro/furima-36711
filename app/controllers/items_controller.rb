@@ -24,7 +24,6 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    # //投稿者以外がeditパスにアクセスしたらップページに戻す
     unless @item.user_id == current_user.id
       redirect_to action: :index
     end

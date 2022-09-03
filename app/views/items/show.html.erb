@@ -24,7 +24,7 @@
     </div>
 
     <% if user_signed_in? %>
-    <%# 上記コードは購入機能実装後に以下コードに差し替える %>
+    <%# ↑上記コードは購入機能実装後に↓以下コードに差し替える %>
     <%# <% if user_signed_in? && @item.buy_record == nil %>
       <% if current_user.id == @item.user_id %>
         <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>

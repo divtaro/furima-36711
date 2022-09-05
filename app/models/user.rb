@@ -21,5 +21,5 @@ class User < ApplicationRecord
 
   # アソシエーション
   has_many :items
-  # has_many :buy_records
+  has_many :buy_records
 end

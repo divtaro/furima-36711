@@ -1,8 +1,8 @@
 class BuyForm
   include ActiveModel::Model
 
-  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalities, :house_num, :building
-  
+  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalities, :house_num, :building, :tel, :buy_record_id
+
   with_options presence: true do
     validates :user_id
     validates :item_id

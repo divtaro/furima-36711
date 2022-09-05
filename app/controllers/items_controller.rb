@@ -52,6 +52,10 @@ class ItemsController < ApplicationController
   end
 
   def set_redirect
-    redirect_to action: :index unless @item.user_id == current_user.id
+    # redirect_to action: :index unless @item.user_id == current_user.id
+    # ↓if文で書き換え
+    if @item.user_id != current_user.id || @item.buy_record != nil
+      redirect_to action: :index 
+    end
   end
 end

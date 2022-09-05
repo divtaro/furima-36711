@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_02_081858) do
+ActiveRecord::Schema.define(version: 2022_09_04_025646) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -44,17 +44,30 @@ ActiveRecord::Schema.define(version: 2022_09_02_081858) do
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "item_name", null: false
-    t.string "description", null: false
+    t.text "description", null: false
     t.string "category_id", null: false
-    t.string "status_id", null: false
-    t.string "delivery_charge_id", null: false
-    t.string "prefecture_id", null: false
-    t.string "days_ship_id", null: false
-    t.string "price", null: false
+    t.integer "status_id", null: false
+    t.integer "delivery_charge_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "days_ship_id", null: false
+    t.integer "price", null: false
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "ship_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "post_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "municipalities", null: false
+    t.string "house_num", null: false
+    t.string "building"
+    t.string "tel", null: false
+    t.bigint "buy_record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["buy_record_id"], name: "index_ship_addresses_on_buy_record_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -79,4 +92,5 @@ ActiveRecord::Schema.define(version: 2022_09_02_081858) do
   add_foreign_key "buy_records", "items"
   add_foreign_key "buy_records", "users"
   add_foreign_key "items", "users"
+  add_foreign_key "ship_addresses", "buy_records"
 end

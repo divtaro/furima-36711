@@ -1,24 +1,21 @@
 class BuyForm
   include ActiveModel::Model
 
-  attr_accessor :user, :item, :post_code, :prefecture_id, :municipalities, :house_num, :building, :tel, :buy_record
-  # buy_recordsテーブルの外部キー(user,item)と、ship_addressesテーブルの外部キー(buy_record)は必要なのか？
+  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalities, :house_num, :building
   
-  # buy_recordsテーブルのバリデーション
-  validates :user,           presence: true
-  validates :item,           presence: true
-
-  #ship_addressesのバリデーション
-  validates :post_code,      presence: true
-  validates :prefecture_id,  presence: true
-  validates :municipalities, presence: true
-  validates :house_num,      presence: true
-  validates :building,       presence: true
-  validates :tel,            presence: true
-  validates :buy_record,     presence: true
+  with_options presence: true do
+    validates :user_id
+    validates :item_id
+    validates :post_code,      format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :municipalities
+    validates :house_num
+    validates :tel
+    validates :buy_record_id
+  end
+  validates :prefecture_id,  numericality: { other_than: 1, message: "can't be blank" }
 
   def save
-    BuyRecord.create(user: user, item: item)
-    ShipAddress.create(post_code: post_code, prefecture_id: prefecture_id, municipalities: municipalities, house_num: house_num, building: building, tel: tel, buy_record: buy_record)
-  end
+    buy_record = BuyRecord.create(user_id: user_id, item_id: item_id)
+    ShipAddress.create(post_code: post_code, prefecture_id: prefecture_id, municipalities: municipalities, house_num: house_num, building: building, tel: tel, buy_record_id: buy_record.id)
+  end 
 end

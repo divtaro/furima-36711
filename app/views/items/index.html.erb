@@ -125,12 +125,12 @@
 
           <%# 購入機能実装後にsold out表示を確認 %>
           <%# 商品が売れていればsold outを表示しましょう %>
-          <%# <% if item.buy_record.present? %>
-          <%# <div class='sold-out'>
+          <% if item.buy_record.present? %>
+          <div class='sold-out'>
             <span>Sold Out!!</span>
-          </div> %>
+          </div> 
           <%# //商品が売れていればsold outを表示しましょう %>
-          <%# <% end %>
+          <% end %>
 
         </div>
         <div class='item-info'>

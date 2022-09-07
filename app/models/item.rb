@@ -26,7 +26,7 @@ class Item < ApplicationRecord
   # ** アソシエーション
   # ** ↓userとのアソシエーションを組まないと、どのユーザーが出品するのかが判らないため、出品データを保存できない。
   belongs_to :user
-  # has_one    :buy_record
+  has_one    :buy_record
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions

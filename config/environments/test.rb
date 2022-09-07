@@ -5,7 +5,10 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  
+
+  # DBや外部サイト等への連続のアクセスによる負荷低減設定
+  # config.active_job.queue_adapter = :inline
+
   config.cache_classes = false
 
   # Do not eager load code on boot. This avoids loading your whole application

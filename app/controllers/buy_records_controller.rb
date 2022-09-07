@@ -18,7 +18,8 @@ class BuyRecordsController < ApplicationController
   def create
     # @item = Item.find(params[:item_id])
     @buy_form = BuyForm.new(buy_record_params)
-    if @buy_form.valid? 
+    if @buy_form.valid?
+      pay_item
       @buy_form.save
       redirect_to root_path
     else
@@ -30,7 +31,7 @@ class BuyRecordsController < ApplicationController
 
   def buy_record_params 
     params.require(:buy_form).permit(:post_code, :prefecture_id, :municipalities, :house_num,
-                                     :building, :tel).merge(user_id: current_user.id, item_id: params[:item_id])
+                                     :building, :tel).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def set_item
@@ -42,5 +43,14 @@ class BuyRecordsController < ApplicationController
     if @item.user_id != current_user.id && @item.buy_record != nil
       redirect_to root_path
     end
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述
+      Payjp::Charge.create(
+        amount: @item.price,  # 商品の値段
+        card: buy_record_params[:token],    # カードトークン
+        currency: 'jpy'                     # 通貨の種類（日本円）
+      ) 
   end
 end

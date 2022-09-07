@@ -112,12 +112,6 @@ RSpec.describe BuyForm, type: :model do
         expect(@buy_form.errors.full_messages).to include("Tel can't be blank")
       end
 
-      it '電話番号の桁数が合っていない' do
-        @buy_form.tel = '090123456'
-        @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
-      end
-
       it '電話番号が半角数字ではない' do
         @buy_form.tel = '０９０１２３４５６７８'
         @buy_form.valid?
@@ -131,14 +125,13 @@ RSpec.describe BuyForm, type: :model do
       end
 
       it '電話番号が9桁以下' do
-        # binding.pry
-        @buy_form.tel = '090-1234-56'
+        @buy_form.tel = '090123456'
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
       end
 
       it '電話番号が12桁以上' do
-        @buy_form.tel = '090-1234-56789'
+        @buy_form.tel = '090123456789'
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
       end

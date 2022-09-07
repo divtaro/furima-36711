@@ -1,4 +1,4 @@
 class ShipAddress < ApplicationRecord
-  #buy_recordテーブルとのアソシエーション
+  # buy_recordテーブルとのアソシエーション
   belongs_to :buy_record
 end

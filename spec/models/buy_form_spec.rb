@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BuyForm, type: :model do
   describe 'クレジットカード決済による商品購入' do
-    before do 
+    before do
       user = FactoryBot.create(:user)
       @buy_form = FactoryBot.build(:buy_form, user_id: user.id)
     end
@@ -22,12 +22,12 @@ RSpec.describe BuyForm, type: :model do
       end
 
       it '都道府県が存在する' do
-        prefecture_id  = '2'
+        prefecture_id = '2'
         expect(@buy_form).to be_valid
       end
 
       it '市区町村が存在する' do
-        municipalities  = '名古屋市'
+        municipalities = '名古屋市'
         expect(@buy_form).to be_valid
       end
 
@@ -37,17 +37,17 @@ RSpec.describe BuyForm, type: :model do
       end
 
       it '建物名が存在しなくても良い' do
-        building  = ''
+        building = ''
         expect(@buy_form).to be_valid
       end
 
       it '電話番号が存在する' do
-        tel  = '09012345678'
+        tel = '09012345678'
         expect(@buy_form).to be_valid
       end
 
       it '電話番号が10桁以上11桁以内の半角数値である' do
-        tel  = '09012345678'
+        tel = '09012345678'
         expect(@buy_form).to be_valid
       end
     end
@@ -63,24 +63,24 @@ RSpec.describe BuyForm, type: :model do
         @buy_form.post_code = ''
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include("Post code can't be blank")
-      end  
-      
+      end
+
       it '郵便番号に「ハイフン」が無い' do
         @buy_form.post_code = '1234567'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Post code は、半角数字3桁＋ハイフン（-）＋半角数字4桁の形式で入力してください。")
+        expect(@buy_form.errors.full_messages).to include('Post code は、半角数字3桁＋ハイフン（-）＋半角数字4桁の形式で入力してください。')
       end
 
       it '郵便番号の「ハイフン」前後の桁数が合っていない' do
         @buy_form.post_code = '1234-567'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Post code は、半角数字3桁＋ハイフン（-）＋半角数字4桁の形式で入力してください。")
+        expect(@buy_form.errors.full_messages).to include('Post code は、半角数字3桁＋ハイフン（-）＋半角数字4桁の形式で入力してください。')
       end
 
       it '郵便番号が全角数字である' do
         @buy_form.post_code = '１２３４-５６７'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Post code は、半角数字3桁＋ハイフン（-）＋半角数字4桁の形式で入力してください。")
+        expect(@buy_form.errors.full_messages).to include('Post code は、半角数字3桁＋ハイフン（-）＋半角数字4桁の形式で入力してください。')
       end
 
       it '都道府県が存在しない' do
@@ -110,19 +110,19 @@ RSpec.describe BuyForm, type: :model do
       it '電話番号の桁数が合っていない' do
         @buy_form.tel = '090123456'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Tel は10桁以上11桁以内の半角数値のみで入力してください")
+        expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
       end
 
       it '電話番号が半角数字ではない' do
         @buy_form.tel = '０９０１２３４５６７８'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Tel は10桁以上11桁以内の半角数値のみで入力してください")
+        expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
       end
 
       it '電話番号に「ハイフン」が入っている' do
         @buy_form.tel = '090-1234-5678'
         @buy_form.valid?
-        expect(@buy_form.errors.full_messages).to include("Tel は10桁以上11桁以内の半角数値のみで入力してください")
+        expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
       end
     end
   end

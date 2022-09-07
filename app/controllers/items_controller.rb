@@ -35,9 +35,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.destroy
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.destroy
   end
 
   private
@@ -54,12 +52,10 @@ class ItemsController < ApplicationController
   def set_redirect
     # redirect_to action: :index unless @item.user_id == current_user.id
     # ↓if文で書き換え
-    
+
     # ログイン状態の場合でも、自身が出品していない商品の商品情報編集ページへ遷移しようとすると、商品の販売状況に関わらずトップページに遷移する
     # または
     # ログイン状態の場合でも、自身が出品した売却済み商品の商品情報編集ページへ遷移しようとすると、トップページに遷移する
-    if @item.user_id != current_user.id || @item.buy_record != nil
-      redirect_to action: :index 
-    end
+    redirect_to action: :index if @item.user_id != current_user.id || !@item.buy_record.nil?
   end
 end

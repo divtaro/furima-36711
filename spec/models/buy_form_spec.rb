@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe BuyForm, type: :model do
-  describe '発送先データ登録' do
+  describe 'クレジットカード決済による商品購入' do
     before do 
       user = FactoryBot.create(:user)
       @buy_form = FactoryBot.build(:buy_form, user_id: user.id)
     end
 
-    context '購入商品の決済ができる場合' do
+    context 'クレジットカード決済による商品購入ができる場合' do
       it 'tokenが存在する' do
         expect(@buy_form).to be_valid
       end
@@ -52,7 +52,7 @@ RSpec.describe BuyForm, type: :model do
       end
     end
 
-    context '購入商品の決済ができない場合' do
+    context 'クレジットカード決済による商品購入ができない場合' do
       it 'tokenが存在しない' do
         @buy_form.token = ''
         @buy_form.valid?

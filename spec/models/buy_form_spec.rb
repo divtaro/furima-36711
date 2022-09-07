@@ -6,8 +6,8 @@ RSpec.describe BuyForm, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @buy_form = FactoryBot.build(:buy_form, user_id: user.id, item_id: item.id)
-      sleep 0.1 
-      #sleep以外にDBや外部サイトへの連続アクセスの負荷を低減させる方法↓
+      sleep 0.1
+      # sleep以外にDBや外部サイトへの連続アクセスの負荷を低減させる方法↓
       # config/environments/test.rbのRails.application.configure doの中に
       # config.active_job.queue_adapter = :inlineと記述する
     end
@@ -154,7 +154,6 @@ RSpec.describe BuyForm, type: :model do
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include("Item can't be blank")
       end
-
     end
   end
 end

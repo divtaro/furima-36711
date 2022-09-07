@@ -4,7 +4,8 @@ RSpec.describe BuyForm, type: :model do
   describe 'クレジットカード決済による商品購入' do
     before do
       user = FactoryBot.create(:user)
-      @buy_form = FactoryBot.build(:buy_form, user_id: user.id)
+      item = FactoryBot.create(:item)
+      @buy_form = FactoryBot.build(:buy_form, user_id: user.id, item_id: item.id)
     end
 
     context 'クレジットカード決済による商品購入ができる場合' do
@@ -124,6 +125,32 @@ RSpec.describe BuyForm, type: :model do
         @buy_form.valid?
         expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
       end
+
+      it '電話番号が9桁以下' do
+        # binding.pry
+        @buy_form.tel = '090-1234-56'
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
+      end
+
+      it '電話番号が12桁以上' do
+        @buy_form.tel = '090-1234-56789'
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include('Tel は10桁以上11桁以内の半角数値のみで入力してください')
+      end
+
+      it 'userが紐づいていない' do
+        @buy_form.user_id = nil
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐づいていない' do
+        @buy_form.item_id = nil
+        @buy_form.valid?
+        expect(@buy_form.errors.full_messages).to include("Item can't be blank")
+      end
+
     end
   end
 end
